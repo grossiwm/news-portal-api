@@ -1,0 +1,11 @@
+version: '3'
+services:
+  database:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-mit/conf.d:/etc/mysql/conf.d
+      - ./mysql-mit/storage:/var/lib/mysql
