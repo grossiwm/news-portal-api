@@ -1,9 +1,7 @@
 package com.newsprovider.portal.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.newsprovider.portal.model.Payment;
 import com.newsprovider.portal.model.SubscriptionKind;
-import com.newsprovider.portal.model.enums.PaymentStatus;
 import com.newsprovider.portal.service.PaymentService;
 import com.newsprovider.portal.service.SubscriptionKindService;
 import com.newsprovider.portal.service.UserService;

@@ -39,12 +39,13 @@ public class SecurityConfig {
         http.csrf().disable().cors().and().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .antMatchers(HttpMethod.GET, "/subscription-kinds").permitAll()
+                .antMatchers(HttpMethod.GET, "/news").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        return http.build();
-    }
+            return http.build();
+        }
 
 }
