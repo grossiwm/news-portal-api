@@ -1,5 +1,6 @@
 package com.newsprovider.portal.model;
 
+import com.newsprovider.portal.model.enums.PaymentStatus;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,4 +29,8 @@ public class Payment {
 
     @ManyToOne
     private SubscriptionKind subscriptionKind;
+
+    @Column(name = "payment_status")
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
 }

@@ -3,6 +3,9 @@ package com.newsprovider.portal.config;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +13,18 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
+
+    @Bean
+    public AmqpTemplate amqpTemplate(ConnectionFactory connectionFactory){
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        rabbitTemplate.setMessageConverter(converter());
+        return rabbitTemplate;
+    }
+
+    @Bean
+    public MessageConverter converter(){
+        return new Jackson2JsonMessageConverter();
+    }
 
     @Autowired
     ConnectionFactory connectionFactory;
@@ -64,4 +79,6 @@ public class RabbitMQConfig {
         amqpAdmin.declareBinding(binding);
         return binding;
     }
+
+
 }
