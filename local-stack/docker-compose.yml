@@ -9,3 +9,8 @@ services:
     volumes:
       - ./mysql-mit/conf.d:/etc/mysql/conf.d
       - ./mysql-mit/storage:/var/lib/mysql
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "15672:15672"
+      - "5672:5672"

@@ -3,6 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+!**/.gitkeep
 
 ### STS ###
 .apt_generated
@@ -36,3 +37,5 @@ build/
 ### Local Stack ###
 local-stack/mysql-mit/conf.d/**/*
 local-stack/mysql-mit/storage/**/*
+local-stack/rabbitmq/data/**/*
+local-stack/rabbitmq/log/**/*

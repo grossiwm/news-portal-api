@@ -24,11 +24,11 @@ public class User {
     @Column
     private String password;
 
-    @Transient
-    private String passwordConfirmation;
-
     @Column(name = "native_language")
     private Language nativeLanguage;
+
+    @OneToMany
+    private List<Subscription> subscriptions;
 
     @ManyToMany
     @JoinTable(
@@ -36,4 +36,5 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
+
 }

@@ -11,7 +11,7 @@ public class Category {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
 
     @Column
     private String name;
