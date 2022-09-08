@@ -12,7 +12,5 @@ spring:
     port: 5672
     username: guest
     password: guest
-    volumes:
-      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
 #logging.level.root: DEBUG
