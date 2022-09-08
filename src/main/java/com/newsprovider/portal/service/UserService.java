@@ -1,8 +1,8 @@
 package com.newsprovider.portal.service;
 
 import com.newsprovider.portal.exception.UserNotFoundException;
+import com.newsprovider.portal.model.MyUserPrincipal;
 import com.newsprovider.portal.model.User;
-import com.newsprovider.portal.model.UserPrincipal;
 import com.newsprovider.portal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -26,6 +28,10 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
     public User getById(Long id) {
         return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
@@ -40,6 +46,6 @@ public class UserService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new UserPrincipal(user);
+        return new MyUserPrincipal(user);
     }
 }

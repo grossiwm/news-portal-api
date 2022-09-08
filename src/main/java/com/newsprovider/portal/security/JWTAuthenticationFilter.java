@@ -3,6 +3,7 @@ package com.newsprovider.portal.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.newsprovider.portal.model.MyUserPrincipal;
 import com.newsprovider.portal.model.User;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -53,12 +54,15 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException {
+
+        MyUserPrincipal myUserPrincipal = (MyUserPrincipal) auth.getPrincipal();
+
         String token = JWT.create()
-                .withSubject(((User) auth.getPrincipal()).getEmail())
+                .withSubject(myUserPrincipal.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(Algorithm.HMAC512(SECRET.getBytes()));
 
-        String body = ((User) auth.getPrincipal()).getEmail() + " " + token;
+        String body = token;
 
         res.getWriter().write(body);
         res.getWriter().flush();
