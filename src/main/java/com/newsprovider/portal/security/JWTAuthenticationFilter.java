@@ -3,7 +3,6 @@ package com.newsprovider.portal.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.newsprovider.portal.model.MyUserPrincipal;
 import com.newsprovider.portal.model.User;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

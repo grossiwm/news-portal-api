@@ -22,17 +22,21 @@ public class User {
     @Column
     private String name;
 
-    @Column
+    @Column(unique = true)
     private String email;
 
     @Column
     private String password;
+
 
     @Column(name = "native_language")
     private Language nativeLanguage;
 
     @OneToMany
     private List<Subscription> subscriptions;
+
+    @OneToMany
+    private List<Payment> payments;
 
     @ManyToMany
     @JoinTable(

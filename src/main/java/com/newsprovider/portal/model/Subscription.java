@@ -26,4 +26,5 @@ public class Subscription {
     @ManyToOne
     private User user;
 
+
 }

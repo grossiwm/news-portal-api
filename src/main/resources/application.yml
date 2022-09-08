@@ -5,12 +5,20 @@ spring:
     username: root
     password: root
   jpa:
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: create-drop
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   rabbitmq:
     host: localhost
     port: 5672
     username: guest
     password: guest
-
+    queue:
+      payments:
+        toProcess:
+          name: paymentsToProcessQueue
+        processed:
+          name: paymentsProcessedQueue
+    exchange:
+      payments:
+        name: paymentsExchange
 #logging.level.root: DEBUG

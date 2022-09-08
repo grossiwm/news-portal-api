@@ -1,5 +1,6 @@
-package com.newsprovider.portal.model;
+package com.newsprovider.portal.security;
 
+import com.newsprovider.portal.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
