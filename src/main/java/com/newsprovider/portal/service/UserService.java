@@ -55,8 +55,6 @@ public class UserService implements UserDetailsService {
         User user =  userRepository.findByEmail(email);
         if (user == null)
             throw new UserNotFoundException();
-
-        user.setPassword(null);
         return user;
     }
 

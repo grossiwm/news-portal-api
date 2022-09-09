@@ -45,7 +45,8 @@ public class PaymentService {
                 payment.getId(),
                 payment.getRequestDate(),
                 null,
-                payment.getAmount())
+                payment.getAmount(),
+                payment.getCreditCardDetails())
         );
     }
 }

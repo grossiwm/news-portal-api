@@ -1,5 +1,6 @@
 package com.newsprovider.portal.controller;
 
+import com.newsprovider.portal.model.CreditCardDetails;
 import com.newsprovider.portal.model.Payment;
 import com.newsprovider.portal.model.SubscriptionKind;
 import com.newsprovider.portal.service.PaymentService;
@@ -7,10 +8,7 @@ import com.newsprovider.portal.service.SubscriptionKindService;
 import com.newsprovider.portal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
 
@@ -28,7 +26,7 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping("/subscription/{subscriptionType}")
-    public ResponseEntity<?> pay(@PathVariable String subscriptionType) {
+    public ResponseEntity<?> pay(@PathVariable String subscriptionType, @RequestBody CreditCardDetails creditCardDetails) {
 
 
         SubscriptionKind subscriptionKind = subscriptionKindService.findByName(subscriptionType);
@@ -37,6 +35,7 @@ public class PaymentController {
         payment.setRequestDate(Calendar.getInstance());
         payment.setUser(userService.getAuthenticatedUser());
         payment.setSubscriptionKind(subscriptionKind);
+        payment.setCreditCardDetails(creditCardDetails);
 
         paymentService.requestPayment(payment);
 

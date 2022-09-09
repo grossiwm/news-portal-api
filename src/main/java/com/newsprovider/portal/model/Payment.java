@@ -33,4 +33,7 @@ public class Payment {
     @Column(name = "payment_status")
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
+
+    @Transient
+    private CreditCardDetails creditCardDetails;
 }
