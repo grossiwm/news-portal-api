@@ -21,7 +21,7 @@ public class Subscription {
     private Calendar endDate;
 
     @Column
-    private String paymentId;
+    private Long paymentId;
 
     @ManyToOne
     private User user;

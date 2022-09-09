@@ -1,6 +1,7 @@
 package com.newsprovider.portal.service;
 
 import com.newsprovider.portal.DTO.PaymentDTO;
+import com.newsprovider.portal.exception.PaymentNotFoundException;
 import com.newsprovider.portal.model.Payment;
 import com.newsprovider.portal.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,10 @@ public class PaymentService {
 
     public void requestPayment(Payment payment) {
         sendToQueueAndPersistInDB(payment);
+    }
+
+    public Payment findById(Long id) {
+        return paymentRepository.findById(id).orElseThrow(PaymentNotFoundException::new);
     }
 
     public void save(Payment payment) {

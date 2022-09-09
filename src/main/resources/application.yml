@@ -20,7 +20,13 @@ spring:
           name: paymentsToProcessQueue
         processed:
           name: paymentsProcessedQueue
+      subscriptionNotification:
+        name: subscriptionNotificationQueue
     exchange:
       payments:
         name: paymentsExchange
+      subscriptionNotification:
+        name: subscriptionNotificationExchange
+sendgrid:
+  verifiedSenderIdentity: #{null}
 #logging.level.root: DEBUG

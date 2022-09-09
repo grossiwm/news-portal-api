@@ -35,8 +35,14 @@ public class RabbitMQConfig {
     @Value("${spring.rabbitmq.queue.payments.processed.name}")
     private String paymentsProcessedQueueName;
 
+    @Value("${spring.rabbitmq.queue.subscriptionNotification.name}")
+    private String subscriptionNotificationQueueName;
+
     @Value("${spring.rabbitmq.exchange.payments.name}")
     private String paymentsExchangeName;
+
+    @Value("${spring.rabbitmq.exchange.subscriptionNotification.name}")
+    private String subscriptionNotificationExchangeName;
 
     @Bean
     AmqpAdmin amqpAdmin() {
@@ -51,6 +57,13 @@ public class RabbitMQConfig {
     }
 
     @Bean
+    Queue subscriptionNotificationQueue(AmqpAdmin amqpAdmin) {
+        Queue queue = new Queue(subscriptionNotificationQueueName, true);
+        amqpAdmin.declareQueue(queue);
+        return queue;
+    }
+
+    @Bean
     Queue paymentsProcessedQueue(AmqpAdmin amqpAdmin) {
         Queue queue = new Queue(paymentsProcessedQueueName, true);
         amqpAdmin.declareQueue(queue);
@@ -60,6 +73,13 @@ public class RabbitMQConfig {
     @Bean
     DirectExchange directExchange(AmqpAdmin amqpAdmin) {
         DirectExchange directExchange = new DirectExchange(paymentsExchangeName);
+        amqpAdmin.declareExchange(directExchange);
+        return directExchange;
+    }
+
+    @Bean
+    DirectExchange subscriptionNotificationExchange(AmqpAdmin amqpAdmin) {
+        DirectExchange directExchange = new DirectExchange(subscriptionNotificationExchangeName);
         amqpAdmin.declareExchange(directExchange);
         return directExchange;
     }
@@ -80,5 +100,12 @@ public class RabbitMQConfig {
         return binding;
     }
 
+    @Bean
+    Binding subscriptionNotificationBinding(Queue subscriptionNotificationQueue, DirectExchange subscriptionNotificationExchange, AmqpAdmin amqpAdmin) {
+        Binding binding = BindingBuilder.bind(subscriptionNotificationQueue).to(subscriptionNotificationExchange)
+                .withQueueName();
+        amqpAdmin.declareBinding(binding);
+        return binding;
+    }
 
 }
