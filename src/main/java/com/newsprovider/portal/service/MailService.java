@@ -21,6 +21,9 @@ public class MailService {
     @Value("${sendgrid.verifiedSenderIdentity}")
     private String verifiedSenderIdentity;
 
+    @Value("${sendgrid.apiKey}")
+    private String apiKey;
+
     public void notifyUserOfSubscription(Subscription subscription) throws IOException {
 
         String pattern = "MM-dd-yyyy";
@@ -44,7 +47,7 @@ public class MailService {
     private void send(Mail mail) throws IOException {
         Email from = new Email(verifiedSenderIdentity);
         mail.setFrom(from);
-        SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
+        SendGrid sg = new SendGrid(apiKey);
         Request request = new Request();
         try {
             request.setMethod(Method.POST);
