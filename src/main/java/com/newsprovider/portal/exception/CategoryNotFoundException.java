@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.NOT_FOUND)
-public class PaymentNotFoundException extends RuntimeException {
-    public PaymentNotFoundException() {
-        super("Payment not Found");
+public class CategoryNotFoundException extends RuntimeException {
+    public CategoryNotFoundException() {
+        super("Category not Found");
     }
 }

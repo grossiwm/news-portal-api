@@ -1,5 +1,6 @@
 package com.newsprovider.portal.service;
 
+import com.newsprovider.portal.exception.CategoryNotFoundException;
 import com.newsprovider.portal.model.Category;
 import com.newsprovider.portal.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,9 @@ public class CategoryService {
 
     public List<Category> findAll() {
         return categoryRepository.findAll();
+    }
+
+    public Category findById(Integer id) {
+        return categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new);
     }
 }

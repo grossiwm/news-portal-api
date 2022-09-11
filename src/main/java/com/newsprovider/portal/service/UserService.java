@@ -2,8 +2,11 @@ package com.newsprovider.portal.service;
 
 import com.newsprovider.portal.exception.UserNotFoundException;
 import com.newsprovider.portal.exception.UsernameAlreadyTakenException;
+import com.newsprovider.portal.model.Category;
 import com.newsprovider.portal.model.User;
 import com.newsprovider.portal.model.enums.PaymentStatus;
+import com.newsprovider.portal.repository.CategoryRepository;
+import com.newsprovider.portal.repository.PaymentRepository;
 import com.newsprovider.portal.repository.UserRepository;
 import com.newsprovider.portal.security.MyUserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +32,11 @@ public class UserService implements UserDetailsService {
     private SubscriptionService subscriptionService;
 
     @Autowired
-    private PaymentService paymentService;
+    private PaymentRepository paymentRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
 
     public void save(User user) {
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
@@ -68,7 +75,11 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean hasPendingPayments(User user) {
-        return !paymentService.findByPaymentStatusAndUser(PaymentStatus.REQUESTED, user).isEmpty();
+        return !paymentRepository.findByPaymentStatusAndUser(PaymentStatus.REQUESTED, user).isEmpty();
     }
 
+    public void addCategory(User user, Category category) {
+        user.getCategories().add(category);
+        userRepository.save(user);
+    }
 }

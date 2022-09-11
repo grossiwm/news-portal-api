@@ -21,10 +21,11 @@ public class NewsService {
     @Autowired
     private LoggedUserRepository loggedUserRepository;
 
-    public Object getNews() {
+    public Object getNews(int page) {
 
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromUri(URI.create("/news"));
         URI uri = uriComponentsBuilder.build().toUri();
+        uriComponentsBuilder.queryParam("page", page);
 
         try {
             return restTemplate.getForObject(uri.toString(), Object.class);
@@ -36,7 +37,7 @@ public class NewsService {
     }
 
 
-    public Object getPremiumNews() {
+    public Object getPremiumNews(int page) {
 
         User loggedUser = loggedUserRepository.getAuthenticatedUser();
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromUri(URI.create("/news"));
@@ -46,6 +47,7 @@ public class NewsService {
                 .collect(Collectors.joining(","));
 
         uriComponentsBuilder.queryParam("category", categoriesParam);
+        uriComponentsBuilder.queryParam("page", page);
         URI uri = uriComponentsBuilder.build().toUri();
         try {
             return restTemplate.getForObject(uri.toString(), Object.class);

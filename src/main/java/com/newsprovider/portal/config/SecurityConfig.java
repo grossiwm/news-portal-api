@@ -40,6 +40,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .antMatchers(HttpMethod.GET, "/subscription-kinds").permitAll()
                 .antMatchers(HttpMethod.GET, "/news").permitAll()
+                .antMatchers(HttpMethod.GET, "/category").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager))
