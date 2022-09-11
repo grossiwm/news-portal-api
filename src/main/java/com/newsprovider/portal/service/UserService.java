@@ -3,9 +3,9 @@ package com.newsprovider.portal.service;
 import com.newsprovider.portal.exception.UserNotFoundException;
 import com.newsprovider.portal.exception.UsernameAlreadyTakenException;
 import com.newsprovider.portal.model.User;
+import com.newsprovider.portal.model.enums.PaymentStatus;
 import com.newsprovider.portal.repository.UserRepository;
 import com.newsprovider.portal.security.MyUserPrincipal;
-import com.newsprovider.portal.security.facade.AuthenticationFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +26,10 @@ public class UserService implements UserDetailsService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private AuthenticationFacade authenticationFacade;
+    private SubscriptionService subscriptionService;
+
+    @Autowired
+    private PaymentService paymentService;
 
     public void save(User user) {
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
@@ -50,14 +53,6 @@ public class UserService implements UserDetailsService {
         userRepository.delete(user);
     }
 
-    public User getAuthenticatedUser() {
-        String email = (String) authenticationFacade.getAuthentication().getPrincipal();
-        User user =  userRepository.findByEmail(email);
-        if (user == null)
-            throw new UserNotFoundException();
-        return user;
-    }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username);
@@ -66,4 +61,14 @@ public class UserService implements UserDetailsService {
 
         return new MyUserPrincipal(user);
     }
+
+    public boolean hasActiveSubscription(User user) {
+        return user.getSubscriptions().stream()
+                .anyMatch(s -> subscriptionService.isValid(s));
+    }
+
+    public boolean hasPendingPayments(User user) {
+        return !paymentService.findByPaymentStatusAndUser(PaymentStatus.REQUESTED, user).isEmpty();
+    }
+
 }

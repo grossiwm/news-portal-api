@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/news")
-public class PublicNewsController {
+@RequestMapping("/premium-news")
+public class NewsController {
 
     @Autowired
     private NewsService newsService;
+
 
     @GetMapping
     public ResponseEntity<?> getNews() {

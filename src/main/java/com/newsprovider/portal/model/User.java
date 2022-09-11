@@ -32,7 +32,7 @@ public class User {
     @Column(name = "native_language")
     private Language nativeLanguage;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Subscription> subscriptions;
 
     @OneToMany

@@ -1,11 +1,11 @@
-package com.newsprovider.portal.service;
+package com.newsprovider.portal.producer;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RabbitProducerService {
+public class RabbitProducer {
     @Autowired
     private AmqpTemplate amqpTemplate;
 
