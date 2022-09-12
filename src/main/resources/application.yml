@@ -33,3 +33,15 @@ sendgrid:
   verifiedSenderIdentity: #{null}
   apiKey: #{null}
 #logging.level.root: DEBUG
+management:
+  security:
+    enabled: false
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true

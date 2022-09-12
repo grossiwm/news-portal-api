@@ -41,6 +41,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/subscription-kinds").permitAll()
                 .antMatchers(HttpMethod.GET, "/news").permitAll()
                 .antMatchers(HttpMethod.GET, "/category").permitAll()
+                .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager))
