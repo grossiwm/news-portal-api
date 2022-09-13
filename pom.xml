@@ -78,9 +78,9 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.netflix.spectator</groupId>
-			<artifactId>spectator-api</artifactId>
-			<version>1.3.7</version>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-datadog</artifactId>
+			<version>1.9.3</version>
 		</dependency>
 	</dependencies>
 
