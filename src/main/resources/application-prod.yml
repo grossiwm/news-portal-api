@@ -31,4 +31,7 @@ spring:
         name: subscriptionNotificationExchange
 sendgrid:
   verifiedSenderIdentity: #{null}
-#logging.level.root: DEBUG
+
+datadog.apiKey: #{null}
+datadog.enabled: true
+datadog.step: PT10S

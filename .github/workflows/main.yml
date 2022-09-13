@@ -46,5 +46,7 @@ jobs:
           -p ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build Docker image
         run: docker build -t $REPO:latest -t $REPO:${GITHUB_SHA::8} .
-      - name: Publish Docker image
-        run: docker push $REPO
+      - name: Publish Docker image with commit sha tag
+        run: docker push $REPO:${GITHUB_SHA::8}
+      - name: Publish Docker image with tag latest
+        run: docker push $REPO:latest
