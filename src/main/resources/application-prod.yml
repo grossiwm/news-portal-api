@@ -31,12 +31,3 @@ spring:
         name: subscriptionNotificationExchange
 sendgrid:
   verifiedSenderIdentity: #{null}
-
-datadog.apiKey: #{null}
-datadog.enabled: true
-datadog.step: PT10S
-
-management.metrics.export.datadog:
-  apiKey: #{null}
-  enabled: true
-  step: 1m
