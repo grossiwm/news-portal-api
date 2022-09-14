@@ -57,6 +57,10 @@ jobs:
         run: docker push $REPO:latest
   deploy:
     needs: [docker]
+    env:
+      REPO: ${{ secrets.DOCKER_REPO }}
+      RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
+      APP_NAME: ${{ secrets.AZURE_CONTAINER_APP_NAME }}
     runs-on: ubuntu-latest
     steps:
       - name: 'Az CLI login'
@@ -67,7 +71,4 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: 'Login to Azure'
-        run: |
-          az account show
-          az group list
-          pwd 
+        run: az containerapp update --name $APP_NAME --resource-group $RESOURCE_GROUP --image $REPO:${GITHUB_SHA::8}
