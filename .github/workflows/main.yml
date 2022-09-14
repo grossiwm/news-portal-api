@@ -51,6 +51,7 @@ jobs:
       - name: Publish Docker image with tag latest
         run: docker push $REPO:latest
   deploy:
+    needs: [docker]
     runs-on: ubuntu-latest
     steps:
       - name: 'Az CLI login'
