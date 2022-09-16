@@ -54,4 +54,12 @@ public class UserController {
         userService.addCategory(user, category);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/remove-category/{id}")
+    public ResponseEntity<?> removeCategory(@PathVariable Integer id) {
+        User user = loggedUserRepository.getAuthenticatedUser();
+        Category category = categoryService.findById(id);
+        userService.removeCategory(user, category);
+        return ResponseEntity.ok().build();
+    }
 }

@@ -18,6 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -80,6 +82,13 @@ public class UserService implements UserDetailsService {
 
     public void addCategory(User user, Category category) {
         user.getCategories().add(category);
+        userRepository.save(user);
+    }
+
+    public void removeCategory(User user, Category category) {
+        Set<Category> categories = user.getCategories().stream()
+                .filter(c -> c != category).collect(Collectors.toSet());
+        user.setCategories(categories);
         userRepository.save(user);
     }
 }
