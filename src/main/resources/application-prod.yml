@@ -7,7 +7,6 @@ spring:
     username: #{null}
     password: #{null}
   jpa:
-    hibernate.ddl-auto: update
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   rabbitmq:
     host: #{null}

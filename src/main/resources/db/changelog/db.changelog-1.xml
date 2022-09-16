@@ -1,0 +1,172 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <changeSet author="gabriel (generated)" id="1663367474932-1">
+        <createTable tableName="category">
+            <column name="id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-2">
+        <createTable tableName="category_user">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="category_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-3">
+        <createTable tableName="hibernate_sequence">
+            <column name="next_val" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-4">
+        <createTable tableName="payment">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="amount" type="DECIMAL(19, 2)"/>
+            <column name="payment_status" type="VARCHAR(255)"/>
+            <column name="processed_date" type="datetime"/>
+            <column name="request_date" type="datetime"/>
+            <column name="subscription_kind_id" type="INT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-5">
+        <createTable tableName="subscription">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="end_date" type="datetime"/>
+            <column name="initial_date" type="datetime"/>
+            <column name="payment_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-6">
+        <createTable tableName="subscription_kind">
+            <column name="id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="days" type="INT"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="price" type="DECIMAL(19, 2)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-7">
+        <createTable tableName="subscription_kind_payment">
+            <column name="subscription_kind_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payment_id" type="BIGINT">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-8">
+        <createTable tableName="user">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints unique="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="native_language" type="INT"/>
+            <column name="password" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-9">
+        <createTable tableName="user_payments">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payments_id" type="BIGINT">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-10">
+        <createTable tableName="user_subscriptions">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subscriptions_id" type="BIGINT">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-11">
+        <createIndex indexName="FK2negyq4s67g264i3fi750k5ph" tableName="subscription_kind_payment">
+            <column name="subscription_kind_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-12">
+        <createIndex indexName="FK4spfnm9si9dowsatcqs5or42i" tableName="payment">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-13">
+        <createIndex indexName="FK8l1goo02px4ye49xd7wgogxg6" tableName="subscription">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-14">
+        <createIndex indexName="FKcertxr5jqjh208h6busad5lqc" tableName="user_payments">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-15">
+        <createIndex indexName="FKj0b61qjipt755ertgxu5ie0is" tableName="category_user">
+            <column name="category_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-16">
+        <createIndex indexName="FKj9lcudpdt2qgdjorv2jqchgd" tableName="user_subscriptions">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-17">
+        <createIndex indexName="FKs0ax9mfc8x688b5cxlgjq4cl3" tableName="payment">
+            <column name="subscription_kind_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-18">
+        <addForeignKeyConstraint baseColumnNames="subscription_kind_id" baseTableName="subscription_kind_payment" constraintName="FK2negyq4s67g264i3fi750k5ph" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="subscription_kind" validate="true"/>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-19">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="payment" constraintName="FK4spfnm9si9dowsatcqs5or42i" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="user" validate="true"/>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-20">
+        <addForeignKeyConstraint baseColumnNames="payments_id" baseTableName="user_payments" constraintName="FK7heunukp7jt4n3ukmal3xlp8v" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="payment" validate="true"/>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-21">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="subscription" constraintName="FK8l1goo02px4ye49xd7wgogxg6" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="user" validate="true"/>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-22">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_payments" constraintName="FKcertxr5jqjh208h6busad5lqc" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="user" validate="true"/>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-23">
+        <addForeignKeyConstraint baseColumnNames="subscriptions_id" baseTableName="user_subscriptions" constraintName="FKiw7fulpatyrt1llmx53u97hm0" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="subscription" validate="true"/>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-24">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="category_user" constraintName="FKj0b61qjipt755ertgxu5ie0is" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="category" validate="true"/>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-25">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_subscriptions" constraintName="FKj9lcudpdt2qgdjorv2jqchgd" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="user" validate="true"/>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-26">
+        <addForeignKeyConstraint baseColumnNames="payment_id" baseTableName="subscription_kind_payment" constraintName="FKmobx2x8uug8ci4o1geujijsyj" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="payment" validate="true"/>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-27">
+        <addForeignKeyConstraint baseColumnNames="subscription_kind_id" baseTableName="payment" constraintName="FKs0ax9mfc8x688b5cxlgjq4cl3" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="subscription_kind" validate="true"/>
+    </changeSet>
+    <changeSet author="gabriel (generated)" id="1663367474932-28">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="category_user" constraintName="FKstpchwxpk402oqhb0h4hmjr4m" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="user" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
