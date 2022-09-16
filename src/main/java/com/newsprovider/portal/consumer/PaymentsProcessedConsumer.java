@@ -69,6 +69,7 @@ public class PaymentsProcessedConsumer {
         userRepository.save(user);
 
         payment.setPaymentStatus(PaymentStatus.PROCESSED);
+        payment.setProcessedDate(paymentDTO.processedDate());
         paymentRepository.save(payment);
         rabbitProducerService.produce(subscriptionNotificationExchangeName, subscriptionNotificationQueueName, subscription.getId());
 
