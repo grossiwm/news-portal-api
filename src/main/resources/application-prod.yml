@@ -1,5 +1,5 @@
 newsService:
-  rootUrl: http://localhost:8081
+  rootUrl: https://news-service.happyforest-682c581c.eastus.azurecontainerapps.io
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
