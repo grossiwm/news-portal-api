@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static com.newsprovider.portal.security.SecurityConstants.EXPIRATION_TIME;
-import static com.newsprovider.portal.security.SecurityConstants.SECRET;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -55,11 +54,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             Authentication auth) throws IOException {
 
         MyUserPrincipal myUserPrincipal = (MyUserPrincipal) auth.getPrincipal();
-
+        String jwtSecret = System.getProperty("jwt.secret");
         String token = JWT.create()
                 .withSubject(myUserPrincipal.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .sign(Algorithm.HMAC512(SECRET.getBytes()));
+                .sign(Algorithm.HMAC512(jwtSecret.getBytes()));
 
         String body = token;
 
